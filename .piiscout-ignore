@@ -1,0 +1,3 @@
+# PiiScout scans its own repository in CI. These files hold synthetic personal data on purpose.
+tests/**     *   reason="synthetic values with valid check digits for the unit tests"
+samples/**   *   reason="synthetic demo data, see samples/README.md"

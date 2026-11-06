@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lohnexport monat="2026-10">
+  <Mitarbeiter>
+    <Personalnummer>4711</Personalnummer>
+    <SteuerID>16809624561</SteuerID>
+    <SVNummer>77250771C010</SVNummer>
+    <Kirchensteuer>rk</Kirchensteuer>
+    <Schwerbehindert>ja</Schwerbehindert>
+  </Mitarbeiter>
+  <Mitarbeiter>
+    <Personalnummer>4712</Personalnummer>
+    <SteuerID>58249791308</SteuerID>
+    <SVNummer>60121082B505</SVNummer>
+    <Kirchensteuer>-</Kirchensteuer>
+  </Mitarbeiter>
+</Lohnexport>

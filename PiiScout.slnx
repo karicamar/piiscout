@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PiiScout.Cli/PiiScout.Cli.csproj" />
+    <Project Path="src/PiiScout.Core/PiiScout.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PiiScout.Tests/PiiScout.Tests.csproj" />
+  </Folder>
+</Solution>

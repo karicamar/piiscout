@@ -1,0 +1,5 @@
+Kundennr;Name;E-Mail;Telefon;IBAN;Geburtsdatum;Konfession;Notiz
+10001;Erika Muster;erika.muster84@gmx.de;0152 2345 6781;DE83 9248 8411 1604 6721 05;14.03.1984;rk;Rückruf erbeten
+10002;Jonas Beispiel;j.beispiel@web.de;+49 69 4711 0815;DE51232560135530877664;02.11.1991;;
+10003;Leyla Demir;leyla.demir@posteo.de;(069) 2468 1357;DE34 8741 7522 0147 1659 35;29.02.1988;ev;Newsletter abbestellt
+10004;Max Fallback;info@beispiel-handel.de;069 8765 432;DE42616566546192713390;;;Firmenkunde

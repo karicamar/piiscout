@@ -1,0 +1,1369 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "PiiScout",
+          "version": "1.0.0",
+          "informationUri": "https://github.com/karicamar/piiscout",
+          "rules": [
+            {
+              "id": "PII-EMAIL",
+              "name": "Emailaddress",
+              "shortDescription": {
+                "text": "Email address"
+              },
+              "fullDescription": {
+                "text": "Email addresses. Addresses of a role (support@, datenschutz@) and reserved test domains (example.com, .test, .invalid) are reported as information only."
+              },
+              "help": {
+                "text": "Email addresses. Addresses of a role (support@, datenschutz@) and reserved test domains (example.com, .test, .invalid) are reported as information only. Legal reference: Art. 4(1) GDPR."
+              },
+              "properties": {
+                "security-severity": "5.0",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "Contact"
+                ]
+              }
+            },
+            {
+              "id": "PII-PHONE",
+              "name": "Germanphonenumber",
+              "shortDescription": {
+                "text": "German phone number"
+              },
+              "fullDescription": {
+                "text": "German phone numbers in national (area code with leading 0) and international (+49, 0049) form. National numbers without a mobile prefix need a context word (Tel., phone, Mobil) to count as likely."
+              },
+              "help": {
+                "text": "German phone numbers in national (area code with leading 0) and international (+49, 0049) form. National numbers without a mobile prefix need a context word (Tel., phone, Mobil) to count as likely. Legal reference: Art. 4(1) GDPR."
+              },
+              "properties": {
+                "security-severity": "5.0",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "Contact"
+                ]
+              }
+            },
+            {
+              "id": "PII-DOB",
+              "name": "Dateofbirth",
+              "shortDescription": {
+                "text": "Date of birth"
+              },
+              "fullDescription": {
+                "text": "Dates (31.12.1980, 1980-12-31, 31/12/1980) that a context word or field name marks as a birth date (geb., Geburtsdatum, dob, birth_date). Dates without such context are ignored."
+              },
+              "help": {
+                "text": "Dates (31.12.1980, 1980-12-31, 31/12/1980) that a context word or field name marks as a birth date (geb., Geburtsdatum, dob, birth_date). Dates without such context are ignored. Legal reference: Art. 4(1) GDPR."
+              },
+              "properties": {
+                "security-severity": "5.0",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "Identity"
+                ]
+              }
+            },
+            {
+              "id": "PII-IBAN",
+              "name": "IBAN",
+              "shortDescription": {
+                "text": "IBAN"
+              },
+              "fullDescription": {
+                "text": "International bank account numbers, compact or in groups of four. Validated by country length (ISO 13616) and the mod-97 check digits, so random strings do not match."
+              },
+              "help": {
+                "text": "International bank account numbers, compact or in groups of four. Validated by country length (ISO 13616) and the mod-97 check digits, so random strings do not match. Legal reference: Art. 4(1) GDPR."
+              },
+              "properties": {
+                "security-severity": "7.5",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "Financial"
+                ]
+              }
+            },
+            {
+              "id": "PII-CARD",
+              "name": "Paymentcardnumber",
+              "shortDescription": {
+                "text": "Payment card number"
+              },
+              "fullDescription": {
+                "text": "Card numbers (PAN) of Visa, Mastercard, American Express, Discover, JCB, Diners and Maestro: Luhn check plus issuer prefix and length. Published test cards are information only."
+              },
+              "help": {
+                "text": "Card numbers (PAN) of Visa, Mastercard, American Express, Discover, JCB, Diners and Maestro: Luhn check plus issuer prefix and length. Published test cards are information only. Legal reference: Art. 4(1) GDPR, PCI DSS 3.3/3.5."
+              },
+              "properties": {
+                "security-severity": "7.5",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "Financial"
+                ]
+              }
+            },
+            {
+              "id": "PII-DE-TAXID",
+              "name": "GermantaxIDSteuerID",
+              "shortDescription": {
+                "text": "German tax ID (Steuer-ID)"
+              },
+              "fullDescription": {
+                "text": "The 11-digit Steuerliche Identifikationsnummer: digit distribution rule and ISO 7064 MOD 11,10 check digit. Without a context word (Steuer-ID, IdNr, TIN) it is only a low-confidence hit, because some 11-digit numbers pass by chance."
+              },
+              "help": {
+                "text": "The 11-digit Steuerliche Identifikationsnummer: digit distribution rule and ISO 7064 MOD 11,10 check digit. Without a context word (Steuer-ID, IdNr, TIN) it is only a low-confidence hit, because some 11-digit numbers pass by chance. Legal reference: Art. 87 GDPR, § 139b AO."
+              },
+              "properties": {
+                "security-severity": "7.5",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "GovernmentId"
+                ]
+              }
+            },
+            {
+              "id": "PII-DE-IDCARD",
+              "name": "GermanIDcardorpassportnumber",
+              "shortDescription": {
+                "text": "German ID card or passport number"
+              },
+              "fullDescription": {
+                "text": "Document numbers of the German Personalausweis (since 2010) and Reisepass: nine characters from the reduced alphabet plus the ICAO 7-3-1 check digit. Without a context word it is only a low-confidence hit."
+              },
+              "help": {
+                "text": "Document numbers of the German Personalausweis (since 2010) and Reisepass: nine characters from the reduced alphabet plus the ICAO 7-3-1 check digit. Without a context word it is only a low-confidence hit. Legal reference: Art. 87 GDPR, § 20 PAuswG."
+              },
+              "properties": {
+                "security-severity": "7.5",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "GovernmentId"
+                ]
+              }
+            },
+            {
+              "id": "PII-DE-SVNR",
+              "name": "Germansocialinsurancenumber",
+              "shortDescription": {
+                "text": "German social insurance number"
+              },
+              "fullDescription": {
+                "text": "The Rentenversicherungsnummer (12 characters: area, birth date, initial of the birth name, serial, check digit). It also reveals the birth date and gender, so it counts as highly sensitive. Validated by date and check digit."
+              },
+              "help": {
+                "text": "The Rentenversicherungsnummer (12 characters: area, birth date, initial of the birth name, serial, check digit). It also reveals the birth date and gender, so it counts as highly sensitive. Validated by date and check digit. Legal reference: Art. 87 GDPR, § 18f SGB IV."
+              },
+              "properties": {
+                "security-severity": "7.5",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "GovernmentId"
+                ]
+              }
+            },
+            {
+              "id": "PII-IP",
+              "name": "PublicIPaddress",
+              "shortDescription": {
+                "text": "Public IP address"
+              },
+              "fullDescription": {
+                "text": "Public IPv4 and IPv6 addresses, which are personal data when a person can be identified behind them (CJEU, Breyer). Private, loopback, link-local and carrier-grade NAT ranges are skipped; documentation ranges (192.0.2.0/24, 2001:db8::/32) count as test data."
+              },
+              "help": {
+                "text": "Public IPv4 and IPv6 addresses, which are personal data when a person can be identified behind them (CJEU, Breyer). Private, loopback, link-local and carrier-grade NAT ranges are skipped; documentation ranges (192.0.2.0/24, 2001:db8::/32) count as test data. Legal reference: Art. 4(1) GDPR, CJEU C-582/14 (Breyer)."
+              },
+              "properties": {
+                "security-severity": "3.0",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "Network"
+                ]
+              }
+            },
+            {
+              "id": "PII-HEALTH-ICD",
+              "name": "DiagnosiscodeICD10",
+              "shortDescription": {
+                "text": "Diagnosis code (ICD-10)"
+              },
+              "fullDescription": {
+                "text": "ICD-10 / ICD-10-GM diagnosis codes (a letter, two digits, optional decimals and the certainty marker G/V/Z/A) next to a word like Diagnose, ICD, Befund or Krankschreibung. Health data is a special category under Art. 9 GDPR and may only be processed under strict conditions."
+              },
+              "help": {
+                "text": "ICD-10 / ICD-10-GM diagnosis codes (a letter, two digits, optional decimals and the certainty marker G/V/Z/A) next to a word like Diagnose, ICD, Befund or Krankschreibung. Health data is a special category under Art. 9 GDPR and may only be processed under strict conditions. Legal reference: Art. 9(1) GDPR (health data)."
+              },
+              "properties": {
+                "security-severity": "9.0",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "SpecialCategory"
+                ]
+              }
+            },
+            {
+              "id": "PII-ART9-FIELD",
+              "name": "Specialcategoryfield",
+              "shortDescription": {
+                "text": "Special category field"
+              },
+              "fullDescription": {
+                "text": "A filled CSV column, JSON property or key=value field whose name points to a special category of personal data: religion (incl. Kirchensteuermerkmal), trade union, ethnic origin, health, disability, sexual orientation, genetic or biometric data."
+              },
+              "help": {
+                "text": "A filled CSV column, JSON property or key=value field whose name points to a special category of personal data: religion (incl. Kirchensteuermerkmal), trade union, ethnic origin, health, disability, sexual orientation, genetic or biometric data. Legal reference: Art. 9(1) GDPR."
+              },
+              "properties": {
+                "security-severity": "9.0",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "SpecialCategory"
+                ]
+              }
+            },
+            {
+              "id": "PII-NAME-FIELD",
+              "name": "Personnamebyfield",
+              "shortDescription": {
+                "text": "Person name (by field)"
+              },
+              "fullDescription": {
+                "text": "Values of fields whose name marks a person's name: Vorname, Nachname, Kontoinhaber, debtor, customerName, and the plain column \"Name\" in CSV files. The value must look like a name (letters, no digits or @)."
+              },
+              "help": {
+                "text": "Values of fields whose name marks a person's name: Vorname, Nachname, Kontoinhaber, debtor, customerName, and the plain column \"Name\" in CSV files. The value must look like a name (letters, no digits or @). Legal reference: Art. 4(1) GDPR."
+              },
+              "properties": {
+                "security-severity": "5.0",
+                "tags": [
+                  "privacy",
+                  "gdpr",
+                  "Identity"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "PII-EMAIL",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Email address j***@web.de in field 'from'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "support-ticket.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 30
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "11580e06b267122f"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          }
+        },
+        {
+          "ruleId": "PII-HEALTH-ICD",
+          "ruleIndex": 9,
+          "level": "error",
+          "message": {
+            "text": "Diagnosis code (ICD-10) F**.* in field 'body'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "support-ticket.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 107
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "7c9389fe0b2f01f5"
+          },
+          "properties": {
+            "confidence": "medium",
+            "category": "SpecialCategory"
+          }
+        },
+        {
+          "ruleId": "PII-DE-IDCARD",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "German ID card or passport number ********P1 in field 'ausweisnummer'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "support-ticket.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 160
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "fc78071fb366d5a0"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "GovernmentId"
+          }
+        },
+        {
+          "ruleId": "PII-DE-TAXID",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "German tax ID (Steuer-ID) *********42 in field 'steuer_id'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "support-ticket.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 185
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "a37d9e809ccde4e5"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "GovernmentId"
+          }
+        },
+        {
+          "ruleId": "PII-NAME-FIELD",
+          "ruleIndex": 11,
+          "level": "warning",
+          "message": {
+            "text": "Person name (by field) E. M. in field 'Name'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 7
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "510ddc68cdb3dbd4"
+          },
+          "properties": {
+            "confidence": "medium",
+            "category": "Identity"
+          }
+        },
+        {
+          "ruleId": "PII-EMAIL",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Email address e***@gmx.de in field 'E-Mail'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 20
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "aee316b9e96df12b"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          }
+        },
+        {
+          "ruleId": "PII-PHONE",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "German phone number +49 15*******81 in field 'Telefon'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 42
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "ed918bf13400d675"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          }
+        },
+        {
+          "ruleId": "PII-IBAN",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "IBAN DE83****2105 in field 'IBAN'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 57
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "b56c4c08d507663f"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Financial"
+          }
+        },
+        {
+          "ruleId": "PII-DOB",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Date of birth **.**.1984 in field 'Geburtsdatum'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 85
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "9996c1156ba4810c"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Identity"
+          }
+        },
+        {
+          "ruleId": "PII-ART9-FIELD",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "Special category field [2 chars] in field 'Konfession' (religious belief)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 96
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "c45b03211216b0e0"
+          },
+          "properties": {
+            "confidence": "medium",
+            "category": "SpecialCategory"
+          }
+        },
+        {
+          "ruleId": "PII-NAME-FIELD",
+          "ruleIndex": 11,
+          "level": "warning",
+          "message": {
+            "text": "Person name (by field) J. B. in field 'Name'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 7
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "d819e707a40bde32"
+          },
+          "properties": {
+            "confidence": "medium",
+            "category": "Identity"
+          }
+        },
+        {
+          "ruleId": "PII-EMAIL",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Email address j***@web.de in field 'E-Mail'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "11580e06b267122f"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          }
+        },
+        {
+          "ruleId": "PII-PHONE",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "German phone number +49 69******15 in field 'Telefon'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 40
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "6ba3050732319350"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          }
+        },
+        {
+          "ruleId": "PII-IBAN",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "IBAN DE51****7664 in field 'IBAN'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 57
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "2cf1be88371ac9eb"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Financial"
+          }
+        },
+        {
+          "ruleId": "PII-DOB",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Date of birth **.**.1991 in field 'Geburtsdatum'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 80
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "8c8444e1df275681"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Identity"
+          }
+        },
+        {
+          "ruleId": "PII-NAME-FIELD",
+          "ruleIndex": 11,
+          "level": "warning",
+          "message": {
+            "text": "Person name (by field) L. D. in field 'Name'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 7
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "f1252ec49dc49642"
+          },
+          "properties": {
+            "confidence": "medium",
+            "category": "Identity"
+          }
+        },
+        {
+          "ruleId": "PII-EMAIL",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Email address l***@posteo.de in field 'E-Mail'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 19
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "c64c9492c3247f34"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          }
+        },
+        {
+          "ruleId": "PII-PHONE",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "German phone number +49 69******57 in field 'Telefon'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 41
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "3ffaeeeadb66ccec"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          }
+        },
+        {
+          "ruleId": "PII-IBAN",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "IBAN DE34****5935 in field 'IBAN'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 57
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "200dc1358bce5d75"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Financial"
+          }
+        },
+        {
+          "ruleId": "PII-DOB",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Date of birth **.**.1988 in field 'Geburtsdatum'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 85
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "0b95968d869b69e3"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Identity"
+          }
+        },
+        {
+          "ruleId": "PII-ART9-FIELD",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "Special category field [2 chars] in field 'Konfession' (religious belief)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 96
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "34bb59e0dabadbd4"
+          },
+          "properties": {
+            "confidence": "medium",
+            "category": "SpecialCategory"
+          }
+        },
+        {
+          "ruleId": "PII-NAME-FIELD",
+          "ruleIndex": 11,
+          "level": "warning",
+          "message": {
+            "text": "Person name (by field) M. F. in field 'Name'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "a8962c46461ba93a"
+          },
+          "properties": {
+            "confidence": "medium",
+            "category": "Identity"
+          }
+        },
+        {
+          "ruleId": "PII-PHONE",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "German phone number +49 69*****32 in field 'Telefon'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 44
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "bcb27ebf7da71296"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          }
+        },
+        {
+          "ruleId": "PII-IBAN",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "IBAN DE42****3390 in field 'IBAN'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "crm-export.csv"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 57
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "ef5629deb0ad4e9a"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Financial"
+          }
+        },
+        {
+          "ruleId": "PII-PHONE",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "German phone number +49 69******70 in field 'Telefon'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/impressum.md"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 10
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "3cbc8a83c0664f0d"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          },
+          "suppressions": [
+            {
+              "kind": "external",
+              "justification": "Impressum: published by law (§ 5 DDG)"
+            }
+          ]
+        },
+        {
+          "ruleId": "PII-DE-TAXID",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "German tax ID (Steuer-ID) *********61 in field 'SteuerID'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "hr/payroll-export.xml"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 15
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "71b8756595c339ae"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "GovernmentId"
+          }
+        },
+        {
+          "ruleId": "PII-DE-SVNR",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "German social insurance number 77*********0 in field 'SVNummer'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "hr/payroll-export.xml"
+                },
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 15
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "b5149c3e62859b47"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "GovernmentId"
+          }
+        },
+        {
+          "ruleId": "PII-ART9-FIELD",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "Special category field [2 chars] in field 'Kirchensteuer' (religious belief (church tax reveals the denomination))"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "hr/payroll-export.xml"
+                },
+                "region": {
+                  "startLine": 7,
+                  "startColumn": 20
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "c45b03211216b0e0"
+          },
+          "properties": {
+            "confidence": "medium",
+            "category": "SpecialCategory"
+          }
+        },
+        {
+          "ruleId": "PII-ART9-FIELD",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "Special category field [2 chars] in field 'Schwerbehindert' (health data (disability))"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "hr/payroll-export.xml"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "bcfd945da64818dd"
+          },
+          "properties": {
+            "confidence": "medium",
+            "category": "SpecialCategory"
+          }
+        },
+        {
+          "ruleId": "PII-DE-TAXID",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "German tax ID (Steuer-ID) *********08 in field 'SteuerID'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "hr/payroll-export.xml"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 15
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "f9911d68c4948fe0"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "GovernmentId"
+          }
+        },
+        {
+          "ruleId": "PII-DE-SVNR",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "German social insurance number 60*********5 in field 'SVNummer'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "hr/payroll-export.xml"
+                },
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 15
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "e15c928e9e8c63a2"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "GovernmentId"
+          }
+        },
+        {
+          "ruleId": "PII-EMAIL",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Email address e***@gmx.de in field 'user'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "logs/app.log"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 48
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "aee316b9e96df12b"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          }
+        },
+        {
+          "ruleId": "PII-IP",
+          "ruleIndex": 8,
+          "level": "note",
+          "message": {
+            "text": "Public IP address 93.184.*.* in field 'ip'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "logs/app.log"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 73
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "6ebf2ad405d561ae"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Network"
+          }
+        },
+        {
+          "ruleId": "PII-CARD",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Payment card number Visa ****0718 in field 'pan'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "logs/app.log"
+                },
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 52
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "045da3f77d220e0c"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Financial"
+          }
+        },
+        {
+          "ruleId": "PII-IBAN",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "IBAN DE16****5438 in field 'iban'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "logs/app.log"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 59
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "344cffda8c7b8013"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Financial"
+          }
+        },
+        {
+          "ruleId": "PII-NAME-FIELD",
+          "ruleIndex": 11,
+          "level": "warning",
+          "message": {
+            "text": "Person name (by field) J. B. in field 'debtor'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "logs/app.log"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 90
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "d819e707a40bde32"
+          },
+          "properties": {
+            "confidence": "medium",
+            "category": "Identity"
+          }
+        },
+        {
+          "ruleId": "PII-IP",
+          "ruleIndex": 8,
+          "level": "note",
+          "message": {
+            "text": "Public IP address 2606:2800:**** in field 'client'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "logs/app.log"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 74
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "9f4e9d0173793290"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Network"
+          }
+        },
+        {
+          "ruleId": "PII-EMAIL",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Email address l***@posteo.de"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "logs/app.log"
+                },
+                "region": {
+                  "startLine": 7,
+                  "startColumn": 57
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "c64c9492c3247f34"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          }
+        },
+        {
+          "ruleId": "PII-PHONE",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "German phone number +49 17******43"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "logs/app.log"
+                },
+                "region": {
+                  "startLine": 7,
+                  "startColumn": 85
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "piiValue/v1": "a6dda677b887e1c2"
+          },
+          "properties": {
+            "confidence": "high",
+            "category": "Contact"
+          }
+        }
+      ]
+    }
+  ]
+}

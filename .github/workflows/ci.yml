@@ -1,0 +1,67 @@
+name: PiiScout
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - run: dotnet restore
+      - run: dotnet build --no-restore -c Release -warnaserror
+      - run: dotnet test --no-build -c Release
+      - run: dotnet pack src/PiiScout.Cli -c Release --no-build -o nupkg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: piiscout-nupkg
+          path: nupkg/*.nupkg
+
+  # Dogfooding: PiiScout scans its own repository. Test data and samples are accepted in .piiscout-ignore,
+  # anything else with personal data at high severity or above fails the build.
+  scan-self:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - name: Scan repository
+        run: dotnet run --project src/PiiScout.Cli -c Release -- . --fail-on high --format sarif -o piiscout.sarif
+      - uses: github/codeql-action/upload-sarif@v4
+        if: always()
+        with:
+          sarif_file: piiscout.sarif
+          category: piiscout
+
+  # The samples show what a failing scan looks like, and that a redacted copy scans clean.
+  demo:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - name: Scan the samples (expected to find personal data)
+        run: |
+          set +e
+          dotnet run --project src/PiiScout.Cli -c Release -- samples --exclude README.md
+          code=$?
+          echo "exit code $code"
+          test $code -eq 1
+      - name: Redact the log, then scan the copy (expected to be clean)
+        run: |
+          dotnet run --project src/PiiScout.Cli -c Release --no-build -- redact samples/logs/app.log -o app.redacted.log
+          cat app.redacted.log
+          dotnet run --project src/PiiScout.Cli -c Release --no-build -- app.redacted.log --min-confidence low --fail-on low

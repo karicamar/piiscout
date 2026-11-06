@@ -1,0 +1,2 @@
+# Accepted findings: path glob, detector (or *), a reason, optionally an expiry date (yyyy-MM-dd)
+docs/impressum.md   *   reason="Impressum: published by law (§ 5 DDG)"
