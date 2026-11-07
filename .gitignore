@@ -487,3 +487,8 @@ $RECYCLE.BIN/
 .env
 appsettings.local.json
 nupkg/
+
+# Sample and example logs are part of the project (the VS template above ignores logs/ and *.log)
+!samples/logs/
+!samples/logs/*.log
+!docs/*.log

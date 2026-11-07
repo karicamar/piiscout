@@ -1,0 +1,7 @@
+2026-11-03T08:14:02Z INFO  auth  login ok user=erika.muster84@gmx.de ip=93.184.216.34 ua="Mozilla/5.0"
+2026-11-03T08:14:09Z INFO  auth  login ok user=svc-batch ip=10.20.0.15
+2026-11-03T08:15:44Z WARN  pay   card declined pan=4597 6020 4629 0718 amount=49.90 EUR order=88213
+2026-11-03T08:16:01Z ERROR pay   SEPA mandate failed iban=DE16826271628923945438 debtor="Jonas Beispiel"
+2026-11-03T08:17:30Z INFO  api   GET /v1/orders/1234567890123 200 client=2606:2800:220:1:248:1893:25c8:1946
+2026-11-03T08:18:12Z INFO  build version 10.0.400.12 deployed from 192.168.1.20
+2026-11-03T08:19:55Z DEBUG mail  password reset sent to leyla.demir@posteo.de (tel. 0171 9876543)

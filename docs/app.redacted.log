@@ -1,0 +1,7 @@
+2026-11-03T08:14:02Z INFO  auth  login ok user=e***@gmx.de ip=93.184.*.* ua="Mozilla/5.0"
+2026-11-03T08:14:09Z INFO  auth  login ok user=svc-batch ip=10.20.0.15
+2026-11-03T08:15:44Z WARN  pay   card declined pan=Visa ****0718 amount=49.90 EUR order=88213
+2026-11-03T08:16:01Z ERROR pay   SEPA mandate failed iban=DE16****5438 debtor="J. B."
+2026-11-03T08:17:30Z INFO  api   GET /v1/orders/1234567890123 200 client=2606:2800:****
+2026-11-03T08:18:12Z INFO  build version 10.0.400.12 deployed from 192.168.1.20
+2026-11-03T08:19:55Z DEBUG mail  password reset sent to l***@posteo.de (tel. +49 17******43)
